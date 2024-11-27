@@ -14,13 +14,18 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // Middleware
-// const corsOptions = {
-//   origin: "http://localhost:5173",
-//   methods: ["GET", "POST", "PATCH", "DELETE"],
-// };
-// app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: [
+      'https://oyedunt.github.io', // Your GitHub Pages domain
+      'http://localhost:5173',    // Include localhost for local testing
+    ],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // Include this if your app uses cookies or authentication
+  })
+);
 
-app.use(cors({ origin: 'http://localhost:5173' }));
+
 app.use(express.json());
 app.use("/assets", express.static(path.join(__dirname, "assets")));
 
